@@ -1,0 +1,108 @@
+﻿@model AviaWeb.Models.AirTicket
+
+@{
+    ViewData["Title"] = "Просмотр полной информации";
+}
+
+<h1>Информация о билете</h1>
+
+<form>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Departure)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Arrival)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DateOfConclusion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DepartureDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ArrivalDate)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Company)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Passenger)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    
+    <tbody>
+        <tr>
+            <td>
+                @Html.DisplayFor(model => model.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Departure)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Arrival)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DateOfConclusion)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.DepartureDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.ArrivalDate)
+            </td>
+            <td>
+                @Html.DisplayFor(model => model.Company)
+            </td>
+
+            <td>
+                <table class="table table-bordered">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th>Номер пассажира</th>
+                            <th>Фамилия</th>
+                            <th>Имя</th>
+                            <th>Отчество</th>
+                            <th>Документы</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>@Model.Passenger.Id</td>
+                            <td>@Model.Passenger.LastName</td>
+                            <td>@Model.Passenger.FirstName</td>
+                            <td>@Model.Passenger.Patronical</td>
+                            <td>
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th>Номер документа</th>
+                                            <th>Тип</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var document in Model.Passenger.Documents)
+                                        {
+                                            <tr>
+                                                <td>@document.Id</td>
+                                                <td>@document.Type</td>
+                                            </tr>
+                                        }
+                                    </tbody>
+                                </table>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+
+            </td>
+        <tr/>
+</table>
+</form>

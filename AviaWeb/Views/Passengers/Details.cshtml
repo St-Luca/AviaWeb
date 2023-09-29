@@ -1,0 +1,47 @@
+﻿@model AviaWeb.Models.Passenger
+
+@{
+    ViewData["Title"] = "Информация о пассажире";
+}
+
+
+<div>
+    <h4>Пассажир</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LastName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LastName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FirstName)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FirstName)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Patronical)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Patronical)
+        </dd>
+        @foreach (var ticket in Model.AirTickets)
+        {
+            @*<dd class = "col-sm-10">
+        @Html.DisplayFor(ticket => ticket.Id)
+        </dd>*@
+                <dd>
+                    @Html.DisplayFor(m => ticket.Id)
+                </dd>
+                <dd>
+                    @Html.DisplayFor(m => ticket.DepartureDate)
+                </dd>
+        }
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model?.Id">Редактировать</a> |
+    <a asp-action="Index">К списку пассажиров</a>
+</div>

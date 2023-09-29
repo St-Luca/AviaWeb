@@ -1,0 +1,75 @@
+﻿@model IEnumerable<AviaWeb.Models.Passenger>
+
+@{
+    ViewData["Title"] = "Просмотр пассажиров";
+}
+
+<h1>Пассажиры</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LastName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FirstName)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Patronical)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.AirTickets)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LastName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FirstName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Patronical)
+            </td>
+            <td>
+                    <table class="table">
+                        <thead>
+                            <tr>
+                                <th>Номер билета</th>
+                                <th>Дата оформления</th>
+                                <!-- Добавьте другие столбцы по необходимости -->
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var ticket in item.AirTickets)
+                            {
+                                <tr>
+                                    <td>@ticket.Id</td>
+                                    <td>@ticket.DateOfConclusion</td>
+                                    <!-- Добавьте другие столбцы по необходимости -->
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+            </td>
+            <td>
+                    <a asp-action="Edit" asp-controller="Passengers" asp-route-id="@item.Id">Редактировать</a> |
+                    <a asp-action="Index" asp-controller="Documents" asp-route-id="@item.Id">Посмотреть документы</a> |
+                    <a asp-action="Information" asp-controller="Report" asp-route-id="@item.Id">Посмотреть отчет</a> |
+                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>
