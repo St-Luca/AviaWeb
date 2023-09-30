@@ -30,18 +30,17 @@ namespace AviaWeb.Models
             Passenger pass2 = new Passenger { Id = 2, LastName = "LN2", FirstName = "FN2", Patronical = "PAT2" };
             Passenger pass3 = new Passenger { Id = 3, LastName = "LN3", FirstName = "FN3", Patronical = "PAT3" };
             Passenger pass4 = new Passenger { Id = 4, LastName = "LN4", FirstName = "FN4", Patronical = "PAT4" };
-            Passenger pass5 = new Passenger { Id = 5, LastName = "LN5", FirstName = "FN5", Patronical = "PAT5" };
 
-            modelBuilder.Entity<Passenger>().HasData(pass1, pass2, pass3, pass4, pass5);
+            modelBuilder.Entity<Passenger>().HasData(pass1, pass2, pass3, pass4);
 
             AirTicket ticket1 = new AirTicket
             {
                 Id = 1,
                 Departure = "Moscow",
                 Arrival = "SaintPetersburg",
-                DateOfConclusion = new DateTime(2023, 9, 20),
-                DepartureDate = new DateTime(2023, 9, 25),
-                ArrivalDate = new DateTime(2023, 9, 26),
+                DateOfConclusion = new DateTime(2023, 9, 20, 10, 15, 0),
+                DepartureDate = new DateTime(2023, 9, 25, 14, 35, 0),
+                ArrivalDate = new DateTime(2023, 9, 26, 13, 15, 0),
                 Company = "AeroFlight",
                 PassengerId = 1
             };
@@ -51,9 +50,9 @@ namespace AviaWeb.Models
                 Id = 2,
                 Departure = "Samara",
                 Arrival = "Moscow",
-                DateOfConclusion = new DateTime(2023, 9, 22),
-                DepartureDate = new DateTime(2023, 9, 26),
-                ArrivalDate = new DateTime(2023, 9, 27),
+                DateOfConclusion = new DateTime(2023, 9, 22, 16, 35, 0),
+                DepartureDate = new DateTime(2023, 9, 26, 18, 54, 0),
+                ArrivalDate = new DateTime(2023, 9, 27, 00, 55, 0),
                 Company = "TopAirlines",
                 PassengerId = 1
             };
@@ -63,9 +62,9 @@ namespace AviaWeb.Models
                 Id = 3,
                 Departure = "Tumen",
                 Arrival = "Ekaterinburg",
-                DateOfConclusion = new DateTime(2023, 9, 26),
-                DepartureDate = new DateTime(2023, 9, 27),
-                ArrivalDate = new DateTime(2023, 9, 28),
+                DateOfConclusion = new DateTime(2023, 9, 26, 19, 54, 0),
+                DepartureDate = new DateTime(2023, 9, 27, 10, 54, 0),
+                ArrivalDate = new DateTime(2023, 9, 28, 11, 54, 0),
                 Company = "AeroFlight",
                 PassengerId = 2
             };
@@ -75,9 +74,9 @@ namespace AviaWeb.Models
                 Id = 4,
                 Departure = "Tumen",
                 Arrival = "Ekaterinburg",
-                DateOfConclusion = new DateTime(2023, 9, 27),
-                DepartureDate = new DateTime(2023, 9, 29),
-                ArrivalDate = default,
+                DateOfConclusion = new DateTime(2023, 9, 27, 15, 35, 0),
+                DepartureDate = new DateTime(2023, 9, 29, 16, 35, 0),
+                ArrivalDate = new DateTime(2023, 9, 30, 18, 35, 0),
                 Company = "TopAirlines",
                 PassengerId = 3
             };
@@ -87,9 +86,9 @@ namespace AviaWeb.Models
                 Id = 5,
                 Departure = "Kurgan",
                 Arrival = "Moscow",
-                DateOfConclusion = new DateTime(2023, 9, 27),
-                DepartureDate = new DateTime(2023, 9, 29),
-                ArrivalDate = default,
+                DateOfConclusion = new DateTime(2023, 9, 27, 17, 35, 0),
+                DepartureDate = new DateTime(2023, 9, 30, 18, 35, 0),
+                ArrivalDate = new DateTime(2023, 10, 1, 18, 35, 0),
                 Company = "SevenAirlines",
                 PassengerId = 4
             };

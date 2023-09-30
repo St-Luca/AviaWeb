@@ -9,23 +9,37 @@ namespace AviaWeb.Models
         [Key]
         [Display(Name = "Номер")]
         public long Id { get; set; }
+        
+        
         [Display(Name = "Пункт отправления")]
         public string Departure { get; set; }
+        
+        
         [Display(Name = "Пункт назначения")]
         public string Arrival { get; set; }
-        [Display(Name = "Дата заключения")]
+        
+        
+        [Display(Name = "Дата заключения" )]
         public DateTime DateOfConclusion { get; set; }
+        
+        
         [Display(Name = "Дата вылета")]
         public DateTime DepartureDate { get; set; }
+        
+        
         [Display(Name = "Дата прилета")]
         public DateTime ArrivalDate { get; set; }
+        
+        
         [Display(Name = "Поставщик")]
         public string Company { get; set; }
+        
         public long PassengerId { get; set; }
 
+        
         [ForeignKey("PassengerId")]
         [Display(Name = "Пассажир")]
-        public Passenger Passenger { get; set; }
+        public Passenger? Passenger { get; set; }
 
         public AirTicket()
         {

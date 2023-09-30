@@ -1,4 +1,5 @@
 using AviaWeb.Models;
+using Microsoft.AspNetCore.Authentication.Certificate;
 using Microsoft.EntityFrameworkCore;
 
 namespace AviaWeb
@@ -16,6 +17,8 @@ namespace AviaWeb
             // Add services to the container.
             builder.Services.AddControllersWithViews();
 
+            builder.Services.AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme).AddCertificate();
+
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -31,7 +34,7 @@ namespace AviaWeb
 
             app.UseRouting();
 
-            app.UseAuthorization();
+            app.UseAuthentication();
 
             app.MapControllerRoute(
                 name: "default",

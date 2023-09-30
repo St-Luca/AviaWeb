@@ -61,7 +61,6 @@ namespace AviaWeb.Controllers
         // GET: Passengers/Create
         public IActionResult Create()
         {
-            ViewData["AirTicketId"] = new SelectList(_context.AirTickets, "Id", "Id");
             return View();
         }
 
@@ -78,7 +77,6 @@ namespace AviaWeb.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AirTicketId"] = new SelectList(_context.AirTickets, "Id", "Id", passenger.AirTickets); ///////////
             return View(passenger);
         }
 
@@ -95,7 +93,6 @@ namespace AviaWeb.Controllers
             {
                 return NotFound();
             }
-            ViewData["AirTicketId"] = new SelectList(_context.AirTickets, "Id", "Id", passenger.AirTickets);///////////
             return View(passenger);
         }
 
@@ -131,7 +128,6 @@ namespace AviaWeb.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            ViewData["AirTicketId"] = new SelectList(_context.AirTickets, "Id", "Id", passenger.AirTickets);/////////
             return View(passenger);
         }
 
@@ -145,6 +141,7 @@ namespace AviaWeb.Controllers
 
             var passenger = await _context.Passengers
                 .Include(p => p.AirTickets) //////////
+                .Include(p => p.Documents) ////
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (passenger == null)
             {

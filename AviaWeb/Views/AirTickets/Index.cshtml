@@ -31,33 +31,35 @@
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Departure)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Arrival)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DateOfConclusion)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DepartureDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ArrivalDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Company)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="DetailsForTicket" asp-controller="Passengers" asp-route-id="@item.PassengerId">Просмотреть пассажира</a> |
-                <a asp-action="DetailsFull" asp-route-id="@item.Id">Полная информация о билете</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-            </td>
-        </tr>
-}
-    </tbody>
+    @foreach (var item in Model) {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Departure)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Arrival)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DateOfConclusion)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.DepartureDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.ArrivalDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Company)
+                </td>
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-secondary mr-100" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> 
+                        <a class="btn btn-secondary mr-5" asp-action="DetailsForTicket" asp-controller="Passengers" asp-route-id="@item.PassengerId">Просмотреть пассажира</a>
+                        <a class="btn btn-secondary mr-5" asp-action="DetailsFull" asp-route-id="@item.Id">Полная информация о билете</a>
+                        <a class="btn btn-secondary mr-5" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </div>
+                </td>
+            </tr>
+    }
+        </tbody>
 </table>

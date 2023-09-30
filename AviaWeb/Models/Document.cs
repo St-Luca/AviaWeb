@@ -16,8 +16,7 @@ namespace AviaWeb.Models
         public long PassengerId { get; set; }
 
         [ForeignKey("PassengerId")]
-
         
-        public Passenger Passenger { get; set; }
+        public Passenger? Passenger { get; set; }
     }
 }

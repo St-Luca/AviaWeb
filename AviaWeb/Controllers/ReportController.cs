@@ -20,13 +20,37 @@ namespace AviaWeb.Controllers
             return View(await aviaContext.ToListAsync());
         }
 
-        [Route("Report/Information/{id:int}")]
-        public async Task<IActionResult> Information(long id)
+        //[Route("Report/Information/{id:int}")]
+        //public async Task<IActionResult> Information(long id)
+        //{
+        //    if (_context.Passengers != null && _context.AirTickets != null)
+        //    {
+        //        Passenger pass = _context.Passengers.FirstOrDefault(x => x.Id == id);
+        //        return View(await _context.AirTickets.Where(d => d.PassengerId == pass.Id).ToListAsync());
+        //    }
+        //    else
+        //    {
+        //        return Problem("Not enough data");
+        //    }
+        //}
+
+        [Route("Report/Information")]
+        public async Task<IActionResult> Information([FromQuery] long id, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
             if (_context.Passengers != null && _context.AirTickets != null)
             {
-                Passenger pass = _context.Passengers.FirstOrDefault(x => x.Id == id);
-                return View(await _context.AirTickets.Where(d => d.PassengerId == pass.Id).ToListAsync());
+                Passenger pass = _context.Passengers.Find(id);
+                if(pass == null)
+                {
+                    return Problem("Такого пассажира нет");
+                }
+                else
+                {
+                    var tickets = await _context.AirTickets.Where(d => d.PassengerId == pass.Id).ToListAsync();
+                    var filteredTickets = tickets.Where(t => (t.ArrivalDate >= startDate && t.ArrivalDate <= endDate) ||
+                                                       (t.DateOfConclusion >= startDate && t.DateOfConclusion <= endDate));
+                    return View(filteredTickets);
+                }
             }
             else
             {

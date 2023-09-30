@@ -4,72 +4,95 @@
     ViewData["Title"] = "Просмотр пассажиров";
 }
 
+
 <h1>Пассажиры</h1>
 
 <table class="table">
     <thead>
         <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.LastName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.FirstName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Patronical)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.AirTickets)
-            </th>
-            <th></th>
+            <th>Номер</th>
+            <th>Фамилия</th>
+            <th>Имя</th>
+            <th>Отчество</th>
+            <th>Билеты</th>
+            <th>Действия</th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.LastName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.FirstName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Patronical)
-            </td>
-            <td>
-                    <table class="table">
-                        <thead>
-                            <tr>
-                                <th>Номер билета</th>
-                                <th>Дата оформления</th>
-                                <!-- Добавьте другие столбцы по необходимости -->
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @foreach (var ticket in item.AirTickets)
-                            {
-                                <tr>
-                                    <td>@ticket.Id</td>
-                                    <td>@ticket.DateOfConclusion</td>
-                                    <!-- Добавьте другие столбцы по необходимости -->
-                                </tr>
-                            }
-                        </tbody>
-                    </table>
-            </td>
-            <td>
-                    <a asp-action="Edit" asp-controller="Passengers" asp-route-id="@item.Id">Редактировать</a> |
-                    <a asp-action="Index" asp-controller="Documents" asp-route-id="@item.Id">Посмотреть документы</a> |
-                    <a asp-action="Information" asp-controller="Report" asp-route-id="@item.Id">Посмотреть отчет</a> |
-                    <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-            </td>
-        </tr>
-}
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>@Html.DisplayFor(modelItem => item.Id)</td>
+                <td>@Html.DisplayFor(modelItem => item.LastName)</td>
+                <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
+                <td>@Html.DisplayFor(modelItem => item.Patronical)</td>
+                <td>@String.Join(",", item.AirTickets.Select(ticket => $"{ticket.Id}"))</td>
+                
+                <td>
+                    <div class="btn-group">
+                        <a class="btn btn-secondary mr-2" asp-action="Edit" asp-controller="Passengers" asp-route-id="@item.Id">Редактировать</a>
+                        <a class="btn btn-secondary mr-2" asp-action="Index" asp-controller="Documents" asp-route-id="@item.Id">Посмотреть документы</a>
+                        <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#dateModal" onclick="openModal(this)" data-passId="@item.Id">Посмотреть отчет</button>
+                        <a class="btn btn-secondary mr-2" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    </div>
+                </td>
+            </tr>
+        }
     </tbody>
 </table>
+
+
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/@@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+
+<div class="modal fade" id="dateModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Выберите дату</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="dateForm">
+                    <input type="hidden" id="passId">
+                    <div class="form-group">
+                        <label for="startDate">Начальная дата</label>
+                        <input type="date" class="form-control" id="startDate">
+                    </div>
+                    <div class="form-group">
+                        <label for="endDate">Конечная дата</label>
+                        <input type="date" class="form-control" id="endDate">
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Закрыть</button>
+                <button type="button" class="btn btn-primary" onclick="submitDates()">Показать отчет</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    function openModal(button) {
+        var passId = button.getAttribute('data-passId'); 
+        document.getElementById('passId').value = passId; 
+    }
+
+    function submitDates() {
+
+        var startDate = document.getElementById("startDate").value;
+        var endDate = document.getElementById("endDate").value;
+        var passId = document.getElementById("passId").value;
+
+        window.location.href = '/Report/Information?id=' + passId + '&startDate=' + startDate + '&endDate=' + endDate;
+
+        $('#dateModal').modal('hide');
+    }
+</script>
+

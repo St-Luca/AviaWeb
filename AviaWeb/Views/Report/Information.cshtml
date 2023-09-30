@@ -2,7 +2,7 @@
 @{
     ViewData["Title"] = "Отчет о пассажире";
 }
-    <table>
+    <table class="table">
         <thead>
             <tr>
                 <th>Дата оформления</th>
@@ -22,17 +22,7 @@
                     <td>@item.Id</td>
                     <td>@item.Departure</td>
                     <td>@item.Arrival</td>
-                    
-                    @if (item.ArrivalDate != default)
-                        {
-                            <td>true</td>
-                        }
-                    else
-                    {
-                    <td>false</td>
-                    }
-                    
-                    
+                    <td>@item.Company</td>
                 </tr>
             }
         </tbody>

@@ -9,6 +9,7 @@ using AviaWeb.Models;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.CodeAnalysis;
 using Document = AviaWeb.Models.Document;
+using AviaWeb.Models;
 
 namespace AviaWeb.Controllers
 {
@@ -102,6 +103,7 @@ namespace AviaWeb.Controllers
             {
                 return NotFound();
             }
+            document.Passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.Id == document.PassengerId);
             passengerId = document.PassengerId;
             ViewBag.PassengerId = _context.Passengers.Select(a =>
                                   new SelectListItem
@@ -117,15 +119,13 @@ namespace AviaWeb.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(long id, [Bind("Id,Type,PassengerId")] Document document)
+        public async Task<IActionResult> Edit(long id, Document document)
         {
             if (id != document.Id)
             {
                 return NotFound();
             }
-            document.Passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.Id == document.PassengerId);
-            //document.Passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.Id == document.PassengerId);
-            // document.Passenger = await _context.Passengers.FirstOrDefaultAsync(p => p.Id == passengerId);
+
             if (ModelState.IsValid)
             {
                 try
@@ -144,7 +144,7 @@ namespace AviaWeb.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction("Index", "Passengers");
             }
             var errors = ModelState.Values.SelectMany(v => v.Errors);
             ViewBag.PassengerId = _context.Passengers.Select(a =>
