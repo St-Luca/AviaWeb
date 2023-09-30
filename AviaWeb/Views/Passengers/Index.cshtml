@@ -3,7 +3,7 @@
 @{
     ViewData["Title"] = "Просмотр пассажиров";
 }
-
+<script src="https://kit.fontawesome.com/5c7958eb37.js" crossorigin="anonymous"></script>
 
 <h1>Пассажиры</h1>
 
@@ -15,7 +15,7 @@
             <th>Имя</th>
             <th>Отчество</th>
             <th>Билеты</th>
-            <th>Действия</th>
+            <th></th>
         </tr>
     </thead>
     <tbody>
@@ -26,15 +26,18 @@
                 <td>@Html.DisplayFor(modelItem => item.LastName)</td>
                 <td>@Html.DisplayFor(modelItem => item.FirstName)</td>
                 <td>@Html.DisplayFor(modelItem => item.Patronical)</td>
-                <td>@String.Join(",", item.AirTickets.Select(ticket => $"{ticket.Id}"))</td>
-                
-                <td>
-                    <div class="btn-group">
-                        <a class="btn btn-secondary mr-2" asp-action="Edit" asp-controller="Passengers" asp-route-id="@item.Id">Редактировать</a>
-                        <a class="btn btn-secondary mr-2" asp-action="Index" asp-controller="Documents" asp-route-id="@item.Id">Посмотреть документы</a>
-                        <button type="button" class="btn btn-secondary mr-2" data-toggle="modal" data-target="#dateModal" onclick="openModal(this)" data-passId="@item.Id">Посмотреть отчет</button>
-                        <a class="btn btn-secondary mr-2" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                    </div>
+                <td>@String.Join(",", item.AirTickets.Select(ticket => $"{ticket.Id}"))</td> 
+                <td style="text-align: left;">
+                    <a asp-action="Edit" asp-controller="Passengers" asp-route-id="@item.Id" style="text-decoration: none;" title="Редактировать">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a asp-action="Index" asp-controller="Documents" asp-route-id="@item.Id" style="text-decoration: none;" title="Просмотреть документы">
+                        <i class="fa-solid fa-file"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none;" title="Удалить">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
+                    <button type="button" class="btn btn-primary mr-2" data-toggle="modal" data-target="#dateModal" onclick="openModal(this)" data-passId="@item.Id">Посмотреть отчет</button>
                 </td>
             </tr>
         }

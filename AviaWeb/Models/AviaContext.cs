@@ -26,10 +26,10 @@ namespace AviaWeb.Models
                         .WithOne(d => d.Passenger)
                         .HasForeignKey(d => d.PassengerId);
 
-            Passenger pass1 = new Passenger { Id = 1, LastName = "LN1", FirstName = "FN1", Patronical = "PAT1" };
-            Passenger pass2 = new Passenger { Id = 2, LastName = "LN2", FirstName = "FN2", Patronical = "PAT2" };
-            Passenger pass3 = new Passenger { Id = 3, LastName = "LN3", FirstName = "FN3", Patronical = "PAT3" };
-            Passenger pass4 = new Passenger { Id = 4, LastName = "LN4", FirstName = "FN4", Patronical = "PAT4" };
+            Passenger pass1 = new Passenger { Id = 1, LastName = "Иванов", FirstName = "Иван", Patronical = "Иванович" };
+            Passenger pass2 = new Passenger { Id = 2, LastName = "Петров", FirstName = "Петр", Patronical = "Петрович" };
+            Passenger pass3 = new Passenger { Id = 3, LastName = "Смирнов", FirstName = "Семен", Patronical = "Семенович" };
+            Passenger pass4 = new Passenger { Id = 4, LastName = "Архипов", FirstName = "Андрей", Patronical = "Андреевич" };
 
             modelBuilder.Entity<Passenger>().HasData(pass1, pass2, pass3, pass4);
 

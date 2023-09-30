@@ -28,8 +28,12 @@
                     @Html.DisplayFor(modelItem => item.Type)
                 </td>
             <td>
-                <a asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> |
-                <a asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
+                    <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none;" title="Редактировать">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none;" title="Удалить">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
             </td>
         </tr>
 }

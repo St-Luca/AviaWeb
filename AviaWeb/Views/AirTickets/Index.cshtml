@@ -3,12 +3,14 @@
 @{
     ViewData["Title"] = "Просмотр билетов";
 }
+<script src="https://kit.fontawesome.com/5c7958eb37.js" crossorigin="anonymous"></script>
 
 <h1>Билеты</h1>
 
 <table class="table">
     <thead>
         <tr>
+            <th></th>
             <th>
                 @Html.DisplayNameFor(model => model.Departure)
             </th>
@@ -27,12 +29,14 @@
             <th>
                 @Html.DisplayNameFor(model => model.Company)
             </th>
-            <th></th>
         </tr>
     </thead>
     <tbody>
     @foreach (var item in Model) {
             <tr>
+                <td><a asp-action="DetailsFull" asp-route-id="@item.Id" style="text-decoration: none;" title="Полная информация о билете">
+                        <i class="fa-solid fa-circle-info"></i>
+                    </a>
                 <td>
                     @Html.DisplayFor(modelItem => item.Departure)
                 </td>
@@ -51,13 +55,16 @@
                 <td>
                     @Html.DisplayFor(modelItem => item.Company)
                 </td>
-                <td>
-                    <div class="btn-group">
-                        <a class="btn btn-secondary mr-100" asp-action="Edit" asp-route-id="@item.Id">Редактировать</a> 
-                        <a class="btn btn-secondary mr-5" asp-action="DetailsForTicket" asp-controller="Passengers" asp-route-id="@item.PassengerId">Просмотреть пассажира</a>
-                        <a class="btn btn-secondary mr-5" asp-action="DetailsFull" asp-route-id="@item.Id">Полная информация о билете</a>
-                        <a class="btn btn-secondary mr-5" asp-action="Delete" asp-route-id="@item.Id">Удалить</a>
-                    </div>
+                <td style="text-align: center;">
+                    <a asp-action="Edit" asp-route-id="@item.Id" style="text-decoration: none;" title="Редактировать">
+                        <i class="fa-solid fa-pen-to-square"></i>
+                    </a>
+                    <a asp-action="DetailsForTicket" asp-controller="Passengers" asp-route-id="@item.PassengerId" style="text-decoration: none;" title="Просмотреть пассажира">
+                        <i class="fa-solid fa-user"></i>
+                    </a>
+                    <a asp-action="Delete" asp-route-id="@item.Id" style="text-decoration: none;" title="Удалить">
+                        <i class="fa-solid fa-trash-can"></i>
+                    </a>
                 </td>
             </tr>
     }

@@ -20,20 +20,6 @@ namespace AviaWeb.Controllers
             return View(await aviaContext.ToListAsync());
         }
 
-        //[Route("Report/Information/{id:int}")]
-        //public async Task<IActionResult> Information(long id)
-        //{
-        //    if (_context.Passengers != null && _context.AirTickets != null)
-        //    {
-        //        Passenger pass = _context.Passengers.FirstOrDefault(x => x.Id == id);
-        //        return View(await _context.AirTickets.Where(d => d.PassengerId == pass.Id).ToListAsync());
-        //    }
-        //    else
-        //    {
-        //        return Problem("Not enough data");
-        //    }
-        //}
-
         [Route("Report/Information")]
         public async Task<IActionResult> Information([FromQuery] long id, [FromQuery] DateTime startDate, [FromQuery] DateTime endDate)
         {
